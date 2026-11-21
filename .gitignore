@@ -1,0 +1,3 @@
+# Repository signing keys never belong in git.
+*.key
+__pycache__/

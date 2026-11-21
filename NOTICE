@@ -1,0 +1,9 @@
+Kalao Extensions
+Copyright 2026 Brinsley Morrison
+
+SPDX-License-Identifier: GPL-3.0-only
+See LICENSE for the complete terms.
+
+The repository layout, scripts/build_packages.py and tests/test_index_packages.py
+are derived from Mornye-Extension (https://github.com/mornyeapp/Mornye-Extension),
+Copyright 2026 zarzet, LGPL-3.0-only, and modified for Kalao.

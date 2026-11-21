@@ -1,0 +1,44 @@
+{
+  "fixtures": [
+    {
+      "url": "https://lrclib.net/api/search?track_name=%E6%9C%88%E4%BA%AE%E4%BB%A3%E8%A1%A8%E6%88%91%E7%9A%84%E5%BF%83&artist_name=%E9%84%A7%E9%BA%97%E5%90%9B",
+      "bodyJson": [
+        { "id": 101, "trackName": "月亮代表我的心", "artistName": "鄧麗君", "albumName": "島國之情歌第四集", "duration": 209.0,
+          "instrumental": false, "plainLyrics": "你問我愛你有多深", "syncedLyrics": "[00:15.20]你問我愛你有多深\n[00:21.80]我愛你有幾分" },
+        { "id": 102, "trackName": "月亮代表我的心 (Live)", "artistName": "鄧麗君", "duration": 240.5,
+          "instrumental": false, "plainLyrics": "你問我愛你有多深", "syncedLyrics": null },
+        { "id": 103, "trackName": "月亮代表我的心", "artistName": "Instrumental Band", "duration": 209.0, "instrumental": true }
+      ]
+    },
+    {
+      "url": "https://lrclib.net/api/search?q=moon%20song",
+      "bodyJson": []
+    },
+    {
+      "url": "https://lrclib.net/api/get/101",
+      "bodyJson": { "id": 101, "trackName": "月亮代表我的心", "artistName": "鄧麗君", "duration": 209.0,
+        "instrumental": false, "syncedLyrics": "[00:15.20]你問我愛你有多深" }
+    },
+    { "url": "https://lrclib.net/api/get/999", "status": 404, "bodyJson": { "message": "Failed to find specified track" } }
+  ],
+  "calls": [
+    {
+      "name": "search by title and artist keeps synced and plain lyrics, drops instrumentals",
+      "function": "searchLyrics",
+      "argument": { "title": "月亮代表我的心", "artist": "鄧麗君", "durationMs": 209000 },
+      "expect": { "items": 2, "first": { "id": "101", "format": "lrc", "durationMs": 209000 } }
+    },
+    {
+      "name": "free-text search with no results",
+      "function": "searchLyrics",
+      "argument": { "title": "moon song", "artist": "" },
+      "expect": { "items": 0 }
+    },
+    {
+      "name": "get one record by id",
+      "function": "getLyrics",
+      "argument": "101",
+      "expect": { "first": { "format": "lrc", "title": "月亮代表我的心" } }
+    }
+  ]
+}

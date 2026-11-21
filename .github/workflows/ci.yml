@@ -1,0 +1,64 @@
+name: Extension source and package checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  # kalao-ext is built from this Kalao commit; move it forward when the extension format changes.
+  KALAO_REF: eaa17ad9ecb81b0aa989b62500adebcc5d032fd6
+
+jobs:
+  source-and-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Checkout Kalao (for kalao-ext)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: kalaoapp/Kalao
+          ref: ${{ env.KALAO_REF }}
+          path: .kalao
+
+      - name: Restore kalao-ext build
+        id: cargo-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            .kalao/rust_backend/target
+          key: kalao-ext-${{ runner.os }}-${{ env.KALAO_REF }}
+
+      - name: Build kalao-ext
+        working-directory: .kalao/rust_backend
+        run: |
+          rustup toolchain install
+          cargo build --locked --release -p kalao-ext
+          echo "KALAO_EXT=$PWD/target/release/kalao-ext" >> "$GITHUB_ENV"
+
+      - name: Save kalao-ext build
+        if: github.ref == 'refs/heads/main' && steps.cargo-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            .kalao/rust_backend/target
+          key: ${{ steps.cargo-cache.outputs.cache-primary-key }}
+
+      - name: Validate, test and pack sources; compare with committed packages
+        run: python3 scripts/build_packages.py --check
+
+      - name: Validate the index, checksums and signatures
+        run: |
+          python3 -m pip install --quiet cryptography
+          python3 -m unittest discover -s tests -p 'test_*.py'

@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "id": "app.kalao.lrclib",
+  "name": "LRCLIB",
+  "version": "1.0.0",
+  "minKalao": "0.1.0",
+  "author": "Kalao",
+  "description": "Synced and plain lyrics from LRCLIB, an open lyrics database.",
+  "homepage": "https://lrclib.net",
+  "capabilities": ["lyrics"],
+  "languages": [],
+  "network": { "hosts": ["lrclib.net"] },
+  "settings": [
+    { "key": "syncedOnly", "type": "toggle", "label": "Only synced lyrics", "default": false }
+  ],
+  "health": [ { "id": "api", "url": "https://lrclib.net/api/search?q=kalao", "method": "GET" } ]
+}

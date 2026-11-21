@@ -1,0 +1,19 @@
+{
+  "extensions": [
+    {
+      "capabilities": [
+        "lyrics"
+      ],
+      "description": "Synced and plain lyrics from LRCLIB, an open lyrics database.",
+      "id": "app.kalao.lrclib",
+      "minKalao": "0.1.0",
+      "name": "LRCLIB",
+      "sha256": "626700feaf6ab69a862cf199eb15d3499f4ee40733346784cc8e790c10918e1f",
+      "signature": "ed25519:kKmdVEJ9KrZXiPb2PMspOqvTgInCoeIxPls+7szQw1caQl/dZj3pLBf33+nZCE5m4Tw+WC1fs1VwnjfAidyjBA==",
+      "url": "extensions/lrclib.kalaoext",
+      "version": "1.0.0"
+    }
+  ],
+  "name": "Kalao Extensions",
+  "publicKey": "ed25519:abcJet4c49uOI4n5gkGK+QXczXy7mdAkOx/LnWaZlQs="
+}

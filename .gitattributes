@@ -1,0 +1,5 @@
+# Packages must be byte-identical on every platform.
+* text=auto eol=lf
+*.kalaoext binary
+*.png binary
+*.jpg binary
