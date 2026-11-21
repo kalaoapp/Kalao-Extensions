@@ -8,8 +8,8 @@
       "id": "app.kalao.lrclib",
       "minKalao": "0.1.0",
       "name": "LRCLIB",
-      "sha256": "626700feaf6ab69a862cf199eb15d3499f4ee40733346784cc8e790c10918e1f",
-      "signature": "ed25519:kKmdVEJ9KrZXiPb2PMspOqvTgInCoeIxPls+7szQw1caQl/dZj3pLBf33+nZCE5m4Tw+WC1fs1VwnjfAidyjBA==",
+      "sha256": "dc7e12e506445e7c0c8870075e85d07c8a40a03d9bf827496b6eec709fb80009",
+      "signature": "ed25519:b5v2MThbJrorEX9nh5q3+3E+InCg1shTj329VXxQP8qli3zQYGUZ66bQyxsslIEMxqxYEIeT6x/1pHEvMAz7Cg==",
       "url": "extensions/lrclib.kalaoext",
       "version": "1.0.0"
     }
